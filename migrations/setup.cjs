@@ -126,15 +126,5 @@ async function createTablesIfNotExist() {
   }
 }
 
-await sequelize.query(`
-  INSERT OR REPLACE INTO Settings (key, value, description)
-  VALUES (
-    'telegramBotToken',
-    '7882857468:AAH-9vZjeqXhsCbTCH3f31_0G-U4uz0T9WY',
-    'Telegram bot token for automatic task messaging'
-  );
-`, { transaction });
-
-
 // Run the migration
 createTablesIfNotExist();
