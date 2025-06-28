@@ -1,0 +1,356 @@
+/* Modern UI Design */
+:root {
+  --primary: #4361ee;
+  --primary-dark: #3a56d4;
+  --secondary: #3f37c9;
+  --success: #4cc9f0;
+  --danger: #f72585;
+  --warning: #ffbe0b;
+  --info: #4895ef;
+  --dark: #212529;
+  --light: #f8f9fa;
+  --body-bg: #f0f2f5;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--body-bg);
+  color: #495057;
+  overflow-x: hidden;
+}
+
+/* Navbar Styling */
+.navbar {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 0.75rem 1rem;
+}
+
+.navbar-dark {
+  background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%) !important;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+}
+
+/* Prevent navbar items from wrapping */
+.navbar-nav {
+  flex-wrap: nowrap;
+}
+
+.navbar-nav .nav-item {
+  white-space: nowrap;
+}
+
+.nav-link {
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem !important;
+  transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-item {
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
+}
+
+/* Container and Content */
+.container {
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+  color: var(--dark);
+}
+
+/* Card Design */
+.card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.card-header {
+  padding: 1.25rem 1.5rem;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+/* Dashboard Cards */
+.text-white h5.card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.text-white h2.card-text {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.text-white p.card-text {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.bg-primary {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%) !important;
+}
+
+.bg-success {
+  background: linear-gradient(135deg, #4cc9f0 0%, #3a86ff 100%) !important;
+}
+
+.bg-danger {
+  background: linear-gradient(135deg, #f72585 0%, #b5179e 100%) !important;
+}
+
+/* Tables */
+.table {
+  margin-bottom: 0;
+}
+
+.table thead th {
+  border-top: none;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #6c757d;
+  padding: 1rem;
+}
+
+.table tbody td {
+  vertical-align: middle;
+  padding: 1rem;
+  border-color: rgba(0, 0, 0, 0.03);
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.01);
+}
+
+.table-danger, .table-danger > td, .table-danger > th {
+  background-color: rgba(247, 37, 133, 0.1);
+}
+
+/* Buttons */
+.btn {
+  border-radius: 6px;
+  padding: 0.5rem 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.btn-sm {
+  padding: 0.35rem 0.8rem;
+  font-size: 0.82rem;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(67, 97, 238, 0.15);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(67, 97, 238, 0.2);
+}
+
+.btn-danger {
+  background-color: var(--danger);
+  box-shadow: 0 4px 12px rgba(247, 37, 133, 0.15);
+}
+
+.btn-danger:hover {
+  background-color: #e01e79;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(247, 37, 133, 0.2);
+}
+
+.btn-info {
+  background-color: var(--info);
+  box-shadow: 0 4px 12px rgba(72, 149, 239, 0.15);
+  color: white;
+}
+
+.btn-info:hover {
+  background-color: #3b87e0;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(72, 149, 239, 0.2);
+  color: white;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.15);
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(108, 117, 125, 0.2);
+}
+
+.btn i {
+  margin-right: 5px;
+}
+
+/* Forms */
+.form-control {
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 0.2rem rgba(67, 97, 238, 0.15);
+}
+
+label {
+  font-weight: 500;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  color: #495057;
+}
+
+/* Low Stock Items */
+.border-danger {
+  border-color: rgba(247, 37, 133, 0.3) !important;
+}
+
+/* Alerts */
+.alert {
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  border: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.alert-info {
+  background-color: rgba(72, 149, 239, 0.1);
+  color: var(--info);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem 0.5rem;
+  }
+
+  .card-header, .card-body {
+    padding: 1rem;
+  }
+
+  .table thead th, .table tbody td {
+    padding: 0.75rem;
+  }
+}
+
+/* Loading Animation */
+.loader-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(67, 97, 238, 0.3);
+  border-radius: 50%;
+  border-top-color: var(--primary);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Button Ripple Effect */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  transform: scale(0);
+  animation: ripple 0.6s linear;
+  pointer-events: none;
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Card animation initial state */
+.card {
+  opacity: 0;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);
+}
