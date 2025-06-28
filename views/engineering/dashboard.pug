@@ -1,0 +1,21 @@
+extends ../layout
+
+block content
+  h1 Engineering Dashboard
+  p.mb-3 Quick view of critical inventory levels.
+  if lowItems && lowItems.length
+    h3 Low Stock Items
+    table.table.table-striped
+      thead
+        tr
+          th Name
+          th Quantity
+          th Minimum
+      tbody
+        each item in lowItems
+          tr
+            td= item.name
+            td= item.quantity
+            td= item.minQuantity
+  else
+    p All inventory levels are healthy.

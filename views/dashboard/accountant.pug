@@ -1,0 +1,9 @@
+extends ../layout
+
+block content
+  h1 Accountant Dashboard
+  p Welcome #{user.username}! Access accounting tools below.
+  a.btn.btn-primary(href='/accounting')
+    i.fas.fa-calculator.mr-1
+    | Accounting Section
+

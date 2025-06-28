@@ -1,0 +1,82 @@
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+  .container-fluid
+    a.navbar-brand(href='/')
+      i.fas.fa-boxes.mr-2
+      | Inventory Management
+    button.navbar-toggler(
+      type='button'
+      data-toggle='collapse'
+      data-target='#navbarNav'
+      aria-controls='navbarNav'
+      aria-expanded='false'
+      aria-label='Toggle navigation'
+    )
+      span.navbar-toggler-icon
+    #navbarNav.collapse.navbar-collapse
+      ul.navbar-nav.mr-auto.flex-nowrap
+        li.nav-item
+          a.nav-link(href='/')
+            i.fas.fa-home.mr-1
+            | Home
+        if user
+          li.nav-item
+            a.nav-link(href='/dashboard')
+              i.fas.fa-tachometer-alt.mr-1
+              | Dashboard
+          li.nav-item
+            a.nav-link(href='/documents')
+              i.fas.fa-file-alt.mr-1
+              | Documents
+          li.nav-item
+            a.nav-link(href='/tickets')
+              i.fas.fa-ticket-alt.mr-1
+              | Tickets
+          li.nav-item
+            a.nav-link(href='/events')
+              i.fas.fa-calendar-alt.mr-1
+              | Calendar
+          if user && (user.role === 'admin' || user.role === 'superAdmin')
+            li.nav-item
+              a.nav-link(href='/admin')
+                i.fas.fa-user-shield.mr-1
+                | Admin
+          // Ролевые пункты навигации
+          if user.role === 'engineer'
+            li.nav-item
+              a.nav-link(href='/engineering')
+                i.fas.fa-wrench.mr-1
+                | Engineering
+            // Optional engineer dashboard link
+            li.nav-item
+              a.nav-link(href='/engineering/dashboard')
+                i.fas.fa-tachometer-alt.mr-1
+                | Engineer Dashboard
+          if user.role === 'accountant'
+            li.nav-item
+              a.nav-link(href='/accounting')
+                i.fas.fa-calculator.mr-1
+                | Accounting
+            // Optional accountant dashboard link
+            li.nav-item
+              a.nav-link(href='/accounting/dashboard')
+                i.fas.fa-tachometer-alt.mr-1
+                | Accountant Dashboard
+      ul.navbar-nav.ml-auto
+        if user
+          li.nav-item
+            span.nav-link
+              i.fas.fa-user.mr-1
+              | Welcome #{user.username}
+          li.nav-item
+            a.nav-link(href='/users/logout')
+              i.fas.fa-sign-out-alt.mr-1
+              | Logout
+        else
+          li.nav-item
+            a.nav-link(href='/users/login')
+              i.fas.fa-sign-in-alt.mr-1
+              | Login
+          li.nav-item
+            a.nav-link(href='/users/register')
+              i.fas.fa-user-plus.mr-1
+              | Register

@@ -1,0 +1,51 @@
+extends ../admin-layout
+
+block content
+  .row
+    .col-lg-12
+      h1.page-header
+        | Materials Management
+        a.btn.btn-success.pull-right(href='/admin/inventory/add')
+          i.fa.fa-plus  Add New Material
+  
+  .row
+    .col-lg-12
+      .panel.panel-default
+        .panel-heading
+          h3.panel-title
+            i.fa.fa-tools.mr-1
+            |  Materials List
+        .panel-body
+          .table-responsive
+            table.table.table-bordered.table-hover.table-striped
+              thead
+                tr
+                  th Item Name
+                  th Quantity
+                  th Unit
+                  th Price
+                  th Supplier
+                  th Last Updated
+                  th Updated By
+                  th Actions
+              tbody
+                if materials.length > 0
+                  each item in materials
+                    tr(class=item.quantity < 10 ? 'danger' : '')
+                      td= item.name
+                      td= item.quantity
+                      td= item.unit
+                      td $#{item.price.toFixed(2)}
+                      td= item.supplier || 'N/A'
+                      td= item.lastUpdated.toLocaleDateString()
+                      td= item.updatedBy ? item.updatedBy.username : 'Unknown'
+                      td
+                        a.btn.btn-xs.btn-info.mr-1(href=`/admin/inventory/edit/${item.id}`)
+                          i.fa.fa-edit
+                        form(action=`/admin/inventory/delete/${item.id}`, method='POST', style='display:inline;', onsubmit="return confirm('Are you sure you want to delete this item?');")
+                          button.btn.btn-xs.btn-danger(type='submit')
+                            i.fa.fa-trash
+                else
+                  tr
+                    td(colspan='8').text-center No materials found.
+                      a.btn.btn-primary.ml-2(href='/admin/inventory/add') Add your first material

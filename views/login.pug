@@ -1,0 +1,43 @@
+extends layout
+
+block content
+  .container.mt-5
+    .row
+      .col-md-6.mx-auto
+        .card.card-body
+          h1.text-center.mb-3
+            i.fas.fa-sign-in-alt  Login
+          
+          if error_msg && error_msg.length
+            .alert.alert-danger= error_msg
+          
+          if error && error.length
+            .alert.alert-danger= error
+          
+          if success_msg && success_msg.length
+            .alert.alert-success= success_msg
+          
+          form(action="/users/login", method="POST")
+            .form-group
+              label(for="email") Email
+              input.form-control(
+                type="email",
+                name="email",
+                placeholder="Enter Email",
+                required
+              )
+            
+            .form-group
+              label(for="password") Password
+              input.form-control(
+                type="password",
+                name="password",
+                placeholder="Enter Password",
+                required
+              )
+            
+            button.btn.btn-primary.btn-block(type="submit") Login
+          
+          p.lead.mt-4
+            | No Account? 
+            a(href="/users/register") Register

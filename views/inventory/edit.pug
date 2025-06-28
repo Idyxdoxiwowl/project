@@ -1,0 +1,50 @@
+extends ../layout
+
+block content
+  h1.mb-4 Edit Inventory Item
+
+  .row
+    .col-md-8.mx-auto
+      .card
+        .card-body
+          form(action=`/inventory/edit/${item.id}`, method='POST')
+            .form-group
+              label(for='name') Item Name
+              input.form-control(type='text', name='name', id='name', value=item.name, required)
+
+            .form-group
+              label(for='category') Category
+              select.form-control(name='category', id='category', required)
+                option(value='') Select a category
+                option(value='consumable', selected=item.category === 'consumable') Consumable
+                option(value='material', selected=item.category === 'material') Material
+
+            .form-row
+              .form-group.col-md-6
+                label(for='quantity') Quantity
+                input.form-control(type='number', name='quantity', id='quantity', min='0', step='1', value=item.quantity, required)
+
+              .form-group.col-md-6
+                label(for='minQuantity') Min Quantity
+                input.form-control(type='number', name='minQuantity', id='minQuantity', min='0', value=item.minQuantity)
+            .form-group.col-md-6
+              label(for='unit') Unit
+              input.form-control(type='text', name='unit', id='unit', value=item.unit)
+
+            .form-group
+              label(for='price') Price (per unit)
+              .input-group
+                .input-group-prepend
+                  span.input-group-text $
+                input.form-control(type='number', name='price', id='price', min='0', step='0.01', value=item.price, required)
+
+            .form-group
+              label(for='supplier') Supplier
+              input.form-control(type='text', name='supplier', id='supplier', value=item.supplier)
+
+            .form-group
+              label(for='description') Description
+              textarea.form-control(name='description', id='description', rows='3')= item.description
+
+            button.btn.btn-primary(type='submit') Update Item
+            a.btn.btn-secondary.ml-2(href='/dashboard') Cancel

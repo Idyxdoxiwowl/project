@@ -1,0 +1,112 @@
+extends layout
+
+block content
+  h1.mb-4 Dashboard
+
+  .row
+    .col-md-4
+      .card.text-white.bg-primary.mb-3
+        .card-header
+          h5.card-title
+            i.fas.fa-prescription-bottle.mr-2
+            | Consumables
+        .card-body
+          h2.card-text #{consumablesCount}
+          p.card-text Total consumable items
+
+    .col-md-4
+      .card.text-white.bg-success.mb-3
+        .card-header
+          h5.card-title
+            i.fas.fa-tools.mr-2
+            | Materials
+        .card-body
+          h2.card-text #{materialsCount}
+          p.card-text Total material items
+
+    .col-md-4
+      .card.text-white.bg-danger.mb-3
+        .card-header
+          h5.card-title
+            i.fas.fa-exclamation-triangle.mr-2
+            | Low Stock
+        .card-body
+          h2.card-text #{lowStockItems.length}
+          p.card-text Items with low stock
+
+  .row.mt-4
+    .col-md-12
+      .card
+        .card-header
+          h5.card-title
+            i.fas.fa-history.mr-2
+            | Recent Inventory Items
+          if user.role === 'engineer' || user.role === 'superAdmin'
+            a.btn.btn-sm.btn-primary.float-right(href='/inventory/add', data-toggle='tooltip', title='Add new inventory item')
+              i.fas.fa-plus.mr-1
+              | Add New Item
+        .card-body
+          if inventoryItems.length > 0
+            table.table.table-striped
+              thead
+                tr
+                  th Name
+                  th Category
+                  th Quantity
+                  th Unit
+                  th Price
+                  th Last Updated
+                  if user.role === 'engineer' || user.role === 'superAdmin'
+                    th Actions
+              tbody
+                each item in inventoryItems
+                  tr(class=item.quantity < item.minQuantity ? 'table-danger' : '')
+                    td= item.name
+                    td= item.category
+                    td= item.quantity
+                    td= item.unit
+                    td $#{item.price.toFixed(2)}
+                    td= item.lastUpdated.toLocaleDateString()
+                    if user.role === 'engineer' || user.role === 'superAdmin'
+                      td
+                        a.btn.btn-sm.btn-info.mr-1(href=`/inventory/edit/${item.id}`, data-toggle='tooltip', title='Edit item')
+                          i.fas.fa-edit
+                        a.btn.btn-sm.btn-danger(href=`/inventory/delete/${item.id}`, data-toggle='tooltip', title='Delete item')
+                          i.fas.fa-trash
+          else
+            p.lead No inventory items found.
+            if user.role === 'engineer' || user.role === 'superAdmin'
+              a.btn.btn-primary(href='/inventory/add') Add your first item
+
+  if lowStockItems.length > 0
+    .row.mt-4
+      .col-md-12
+        .card.border-danger
+          .card-header.bg-danger.text-white
+            h5.card-title
+              i.fas.fa-exclamation-circle.mr-2
+              | Low Stock Items
+          .card-body
+            table.table.table-striped
+              thead
+                tr
+                  th Name
+                  th Category
+                  th Quantity
+                  th Unit
+                  if user.role === 'engineer' || user.role === 'superAdmin'
+                    th Actions
+              tbody
+                each item in lowStockItems
+                  tr
+                    td= item.name
+                    td= item.category
+                    td= item.quantity
+                    td= item.unit
+                    if user.role === 'engineer' || user.role === 'superAdmin'
+                      td
+                        a.btn.btn-sm.btn-primary.mr-1(href=`/inventory/restock/${item.id}`, data-toggle='tooltip', title='Restock item')
+                          i.fas.fa-plus.mr-1
+                          | Restock
+                        a.btn.btn-sm.btn-info(href=`/inventory/edit/${item.id}`, data-toggle='tooltip', title='Edit item')
+                          i.fas.fa-edit

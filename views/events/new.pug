@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+  h1 Add Event
+  form(method='POST', action='/events/new')
+    .form-group
+      label(for='title') Title
+      input.form-control(type='text', name='title', required)
+    .form-group
+      label(for='description') Description
+      textarea.form-control(name='description')
+    .form-group
+      label(for='start') Start
+      input.form-control(type='datetime-local', name='start', required)
+    .form-group
+      label(for='end') End
+      input.form-control(type='datetime-local', name='end', required)
+    button.btn.btn-primary(type='submit') Save

@@ -1,0 +1,48 @@
+extends ../admin-layout
+
+block content
+  h1.page-header Statistics
+  p
+    a.btn.btn-primary(href='/admin/stats/pdf') Download PDF Report
+  .row
+    .col-lg-4
+      .well
+        h4 Consumables
+        p #{consumablesCount}
+    .col-lg-4
+      .well
+        h4 Materials
+        p #{materialsCount}
+    .col-lg-4
+      .well
+        h4 Low Stock Items
+        p #{lowStockCount}
+  .row
+    .col-lg-12
+      canvas#usageChart(width='400', height='200')
+
+block scripts
+  script(src='https://cdn.jsdelivr.net/npm/chart.js')
+  script.
+    const ctx = document.getElementById('usageChart').getContext('2d');
+    const months = !{JSON.stringify(months)};
+    const counts = !{JSON.stringify(counts)};
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: months,
+        datasets: [{
+          label: 'Items added',
+          data: counts,
+          borderColor: 'rgba(75, 192, 192, 1)',
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          fill: true,
+          tension: 0.1
+        }]
+      },
+      options: {
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });

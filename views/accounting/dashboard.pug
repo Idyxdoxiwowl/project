@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+  h1 Accounting Dashboard
+  p.mb-3 Summary of inventory value.
+  h3 Total Inventory Value: $#{totalValue.toFixed(2)}
+  if items && items.length
+    table.table.table-striped
+      thead
+        tr
+          th Name
+          th Quantity
+          th Unit Price
+          th Total Value
+      tbody
+        each item in items
+          tr
+            td= item.name
+            td= item.quantity
+            td $#{item.price.toFixed(2)}
+            td $#{(item.price * item.quantity).toFixed(2)}
+  else
+    p No inventory items found.

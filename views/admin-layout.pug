@@ -1,0 +1,106 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    title #{title} - Admin Dashboard
+
+    // Bootstrap Core CSS
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css')
+    // Custom CSS
+    link(rel='stylesheet', href='/admin/css/sb-admin.css')
+    // Morris Charts CSS
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css')
+    // Custom Fonts
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css', type='text/css')
+
+  body
+    #wrapper
+      // Navigation
+      nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+        // Brand and toggle get grouped for better mobile display
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-ex1-collapse')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='/admin') Inventory Management Admin
+        // Top Menu Items
+        ul.nav.navbar-right.top-nav
+          li.dropdown
+            a.dropdown-toggle(href='#', data-toggle='dropdown')
+              i.fa.fa-user.mr-1
+              |  #{user.username}
+              b.caret
+            ul.dropdown-menu
+              li
+                a(href='/dashboard')
+                  i.fa.fa-fw.fa-tachometer-alt.mr-1
+                  |  Dashboard
+              li.divider
+              li
+                a(href='/users/logout')
+                  i.fa.fa-fw.fa-power-off.mr-1
+                  |  Log Out
+
+        // Sidebar Menu Items (collapsible)
+        .collapse.navbar-collapse.navbar-ex1-collapse
+          ul.nav.navbar-nav.side-nav
+            li
+              a(href='/admin')
+                i.fa.fa-fw.fa-home
+                |  Home
+            li
+              a(href='/admin/dashboard')
+                i.fa.fa-fw.fa-tachometer-alt.mr-1
+                |  Dashboard
+            li
+              a(href='/admin/consumables')
+                i.fa.fa-fw.fa-box.mr-1
+                |  Consumables
+            li
+              a(href='/admin/materials')
+                i.fa.fa-fw.fa-tools.mr-1
+                |  Materials
+            li
+              a(href='/admin/users')
+                i.fa.fa-fw.fa-users.mr-1
+                |  Users
+            li
+              a(href='/admin/tickets')
+                i.fa.fa-fw.fa-ticket-alt.mr-1
+                |  Tickets
+            li
+              a(href='/admin/stats')
+                i.fa.fa-fw.fa-chart-bar.mr-1
+                |  Stats
+            if user.role === 'superAdmin'
+              li
+                a(href='/admin/settings')
+                  i.fa.fa-fw.fa-cog.mr-1
+                  |  Settings
+            li
+              a(href='/admin/audit')
+                i.fa.fa-fw.fa-history.mr-1
+                |  Audit Logs
+
+      #page-wrapper
+        .container-fluid
+          if error_msg && error_msg.length
+            .alert.alert-danger= error_msg
+          if success_msg && success_msg.length
+            .alert.alert-success= success_msg
+          block content
+
+    // jQuery
+    script(src='https://code.jquery.com/jquery-3.5.1.min.js')
+    // Bootstrap Core JavaScript
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js')
+    // Morris Charts JavaScript
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js')
+    block scripts

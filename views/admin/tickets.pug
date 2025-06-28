@@ -1,0 +1,33 @@
+extends ../admin-layout
+
+block content
+  h1.page-header Service Tickets
+  table.table.table-bordered.table-hover
+    thead
+      tr
+        th Title
+        th Status
+        th Creator
+        th Assignee
+        th Created
+    tbody
+      each ticket in tickets
+        tr
+          td= ticket.title
+          td
+            form(method='POST', action=`/admin/tickets/status/${ticket.id}`)
+              select.form-control(name='status')
+                option(value='open', selected=ticket.status==='open') Open
+                option(value='in_progress', selected=ticket.status==='in_progress') In Progress
+                option(value='resolved', selected=ticket.status==='resolved') Resolved
+              button.btn.btn-xs.btn-primary.mt-1(type='submit') Update
+          td= ticket.creator ? ticket.creator.username : ''
+          td
+            form(method='POST', action=`/admin/tickets/assign/${ticket.id}`)
+              select.form-control(name='assigneeId')
+                option(value='') Unassigned
+                each u in users
+                  option(value=u.id, selected=ticket.assigneeId===u.id)= u.username
+              button.btn.btn-xs.btn-primary.mt-1(type='submit') Assign
+          td= ticket.createdAt.toLocaleDateString()
+

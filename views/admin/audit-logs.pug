@@ -1,0 +1,28 @@
+extends ../admin-layout
+
+block content
+  .row
+    .col-lg-12
+      h1.page-header Audit Logs
+  .row
+    .col-lg-12
+      .table-responsive
+        table.table.table-bordered.table-striped
+          thead
+            tr
+              th Timestamp
+              th User
+              th Action
+              th Details
+          tbody
+            if logs.length > 0
+              each log in logs
+                tr
+                  td= log.createdAt.toLocaleString()
+                  td= log.User ? log.User.username : 'Unknown'
+                  td= log.action
+                  td
+                    pre= JSON.stringify(log.details || {}, null, 2)
+            else
+              tr
+                td(colspan='4') No logs found

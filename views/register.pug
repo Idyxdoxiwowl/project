@@ -1,0 +1,58 @@
+extends layout
+
+block content
+  .container.mt-5
+    .row
+      .col-md-6.mx-auto
+        .card.card-body
+          h1.text-center.mb-3
+            i.fas.fa-user-plus  Register
+          
+          if typeof errors !== 'undefined'
+            each error in errors
+              .alert.alert-danger= error.msg
+          
+          form(action="/users/register", method="POST")
+            .form-group
+              label(for="username") Username
+              input.form-control(
+                type="text",
+                name="username",
+                placeholder="Enter Username",
+                value=typeof username !== 'undefined' ? username : '',
+                required
+              )
+            
+            .form-group
+              label(for="email") Email
+              input.form-control(
+                type="email",
+                name="email",
+                placeholder="Enter Email",
+                value=typeof email !== 'undefined' ? email : '',
+                required
+              )
+            
+            .form-group
+              label(for="password") Password
+              input.form-control(
+                type="password",
+                name="password",
+                placeholder="Create Password",
+                required
+              )
+            
+            .form-group
+              label(for="password2") Confirm Password
+              input.form-control(
+                type="password",
+                name="password2",
+                placeholder="Confirm Password",
+                required
+              )
+            
+            button.btn.btn-primary.btn-block(type="submit") Register
+          
+          p.lead.mt-4
+            | Already have an account? 
+            a(href="/users/login") Login

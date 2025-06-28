@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+  h1.mb-4 Restock Inventory Item
+
+  .row
+    .col-md-8.mx-auto
+      .card
+        .card-header
+          h5.card-title= item.name
+        .card-body
+          .alert.alert-info
+            strong Current quantity: 
+            span #{item.quantity} #{item.unit}
+
+          form(action=`/inventory/restock/${item.id}`, method='POST')
+            .form-group
+              label(for='additionalQuantity') Additional Quantity
+              input.form-control(type='number', name='additionalQuantity', id='additionalQuantity', min='1', step='1', required)
+              small.form-text.text-muted This amount will be added to the current quantity.
+
+            button.btn.btn-primary(type='submit') Restock Item
+            a.btn.btn-secondary.ml-2(href='/dashboard') Cancel

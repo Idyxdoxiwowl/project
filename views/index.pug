@@ -1,0 +1,42 @@
+extends layout
+
+block content
+  .jumbotron.mt-4
+    .container
+      h1.display-4= title
+      p.lead A comprehensive system for tracking consumables and materials inventory
+      hr.my-4
+      p Manage your inventory efficiently with our easy-to-use dashboard and reporting tools.
+      p.lead
+        a.btn.btn-primary.btn-lg(href='/users/login', role='button')
+          i.fas.fa-sign-in-alt.mr-2
+          | Login
+        a.btn.btn-success.btn-lg.ml-2(href='/users/register', role='button')
+          i.fas.fa-user-plus.mr-2
+          | Register
+
+  .container
+    .row
+      .col-md-4
+        .card.mb-4
+          .card-body
+            h5.card-title
+              i.fas.fa-box.mr-2
+              | Track Consumables
+            p.card-text Keep track of all your consumable items with detailed information about quantity, price, and suppliers.
+
+      .col-md-4
+        .card.mb-4
+          .card-body
+            h5.card-title
+              i.fas.fa-tools.mr-2
+              | Manage Materials
+            p.card-text Efficiently manage your materials inventory with our comprehensive tracking system.
+
+      .col-md-4
+        .card.mb-4
+          .card-body
+            h5.card-title
+              i.fas.fa-chart-line.mr-2
+              | Detailed Reports
+            p.card-text Get insights into your inventory with detailed reports and low stock alerts.

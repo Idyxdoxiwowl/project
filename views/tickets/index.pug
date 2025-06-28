@@ -1,0 +1,20 @@
+extends ../layout
+
+block content
+  h1 My Tickets
+  a.btn.btn-primary(href='/tickets/new') New Ticket
+  table.table.table-bordered.mt-3
+    thead
+      tr
+        th Title
+        th Status
+        th Assignee
+        th Created
+    tbody
+      each t in tickets
+        tr
+          td= t.title
+          td= t.status
+          td= t.assignee ? t.assignee.username : 'Unassigned'
+          td= t.createdAt.toLocaleDateString()
+

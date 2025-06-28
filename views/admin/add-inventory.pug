@@ -1,0 +1,63 @@
+extends ../admin-layout
+
+block content
+  .row
+    .col-lg-12
+      h1.page-header
+        | Add Inventory Item
+  
+  .row
+    .col-lg-12
+      .panel.panel-default
+        .panel-heading
+          h3.panel-title
+            i.fa.fa-plus.mr-1
+            |  New Inventory Item
+        .panel-body
+          form(action='/admin/inventory/add', method='POST')
+            .row
+              .col-md-6
+                .form-group
+                  label(for='name') Item Name
+                  input.form-control#name(type='text', name='name', placeholder='Enter item name', required)
+                
+                .form-group
+                  label(for='category') Category
+                  select.form-control#category(name='category', required)
+                    option(value='') -- Select Category --
+                    option(value='consumable') Consumable
+                    option(value='material') Material
+                
+                .form-group
+                  label(for='quantity') Quantity
+                  input.form-control#quantity(type='number', name='quantity', min='0', placeholder='Enter quantity', required)
+                .form-group
+                  label(for='minQuantity') Min Quantity
+                  input.form-control#minQuantity(type='number', name='minQuantity', min='0', value='0')
+
+                .form-group
+                  label(for='unit') Unit
+                  input.form-control#unit(type='text', name='unit', placeholder='e.g. pieces, kg, liters', required)
+              
+              .col-md-6
+                .form-group
+                  label(for='price') Price
+                  .input-group
+                    span.input-group-addon $
+                    input.form-control#price(type='number', name='price', min='0', step='0.01', placeholder='Enter price', required)
+                
+                .form-group
+                  label(for='supplier') Supplier
+                  input.form-control#supplier(type='text', name='supplier', placeholder='Enter supplier name')
+                
+                .form-group
+                  label(for='description') Description
+                  textarea.form-control#description(name='description', rows='5', placeholder='Enter item description')
+            
+            .form-group
+              button.btn.btn-primary(type='submit')
+                i.fa.fa-save.mr-1
+                |  Save Item
+              a.btn.btn-default.ml-2(href='/admin/dashboard')
+                i.fa.fa-times.mr-1
+                |  Cancel

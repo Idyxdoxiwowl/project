@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+  h1 Calendar
+  a.btn.btn-primary(href='/events/new') New Event
+  if events.length
+    table.table.table-bordered.mt-3
+      thead
+        tr
+          th Title
+          th Start
+          th End
+          th Organizer
+      tbody
+        each e in events
+          tr
+            td= e.title
+            td= new Date(e.start).toLocaleString()
+            td= new Date(e.end).toLocaleString()
+            td= e.organizerId
+  else
+    p No events found.

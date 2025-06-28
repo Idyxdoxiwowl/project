@@ -1,0 +1,76 @@
+extends ../admin-layout
+
+block content
+  .container.my-4
+    h1.mb-4 System Settings
+
+    .card.mb-4
+      .card-header
+        h5 Telegram Bot Configuration
+      .card-body
+        form(action='/admin/settings' method='POST')
+          .form-group.mb-3
+            label(for='token') Bot Token
+            input#token.form-control(type='text' name='token' value=token)
+            small.form-text.text-muted Create a bot with @BotFather on Telegram to get this token
+
+          .form-group.mb-3
+            label(for='secret') Secret Key
+            input#secret.form-control(type='text' name='secret' value=secret)
+            small.form-text.text-muted This key will be required for bot commands
+
+          .form-group.mb-3
+            label(for='chatId') Chat ID
+            input#chatId.form-control(type='text' name='chatId' value=chatId)
+            small.form-text.text-muted The chat ID for low stock notifications. You can also set this by sending /setchat [secret] to the bot
+
+          .form-group.mt-4
+            button.btn.btn-primary(type='submit') Save Settings
+
+          .alert.alert-info.mt-3
+            h6 Bot Commands:
+            ul
+              li 
+                strong /low [secret] 
+                | - Shows current low stock items
+              li 
+                strong /restock [secret] [itemId] [amount] 
+                | - Adds specified amount to item stock
+              li 
+                strong /setchat [secret] 
+                | - Sets current chat for low stock notifications
+
+    .card
+      .card-header
+        h5 Email Settings
+      .card-body
+        p Email settings are configured through environment variables:
+        ul
+          li 
+            strong EMAIL_HOST
+            |  - SMTP server host
+          li 
+            strong EMAIL_PORT
+            |  - SMTP server port (default: 587)
+          li 
+            strong EMAIL_USER
+            |  - SMTP username
+          li 
+            strong EMAIL_PASS
+            |  - SMTP password
+          li 
+            strong EMAIL_FROM
+            |  - From address for emails
+          li 
+            strong NOTIFY_EMAIL
+            |  - Default email for notifications
+block content
+  h1 Settings
+  form(method='POST', action='/admin/settings')
+    .form-group
+      label(for='token') Telegram Bot Token
+      input#token.form-control(type='text', name='token', value=token || '')
+    .form-group.mt-3
+      label(for='secret') Telegram Bot Secret
+      input#secret.form-control(type='text', name='secret', value=secret || '')
+    button.btn.btn-primary(type='submit') Save

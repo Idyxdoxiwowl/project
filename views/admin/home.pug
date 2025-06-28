@@ -1,0 +1,119 @@
+extends ../admin-layout
+
+block content
+  .row
+    .col-lg-12
+      h1.page-header Admin Home
+      p.lead Overview of system status
+
+  //– Первая строка: основные панели
+  .row
+    .col-lg-3.col-md-6
+      .panel.panel-primary
+        .panel-heading
+          .row
+            .col-xs-3
+              i.fa.fa-users.fa-5x
+            .col-xs-9.text-right
+              .huge #{usersCount}
+              div Users
+        a(href='/admin/users')
+          .panel-footer
+            span.pull-left Manage Users
+            span.pull-right
+              i.fa.fa-arrow-circle-right
+            .clearfix
+
+    .col-lg-3.col-md-6
+      .panel.panel-green
+        .panel-heading
+          .row
+            .col-xs-3
+              i.fa.fa-box.fa-5x
+            .col-xs-9.text-right
+              .huge #{consumablesCount}
+              div Consumables
+        a(href='/admin/consumables')
+          .panel-footer
+            span.pull-left View Consumables
+            span.pull-right
+              i.fa.fa-arrow-circle-right
+            .clearfix
+
+    .col-lg-3.col-md-6
+      .panel.panel-yellow
+        .panel-heading
+          .row
+            .col-xs-3
+              i.fa.fa-tools.fa-5x
+            .col-xs-9.text-right
+              .huge #{materialsCount}
+              div Materials
+        a(href='/admin/materials')
+          .panel-footer
+            span.pull-left View Materials
+            span.pull-right
+              i.fa.fa-arrow-circle-right
+            .clearfix
+
+    .col-lg-3.col-md-6
+      .panel.panel-red
+        .panel-heading
+          .row
+            .col-xs-3
+              i.fa.fa-ticket-alt.fa-5x
+            .col-xs-9.text-right
+              .huge #{ticketsCount}
+              div Tickets
+        a(href='/admin/tickets')
+          .panel-footer
+            span.pull-left View Tickets
+            span.pull-right
+              i.fa.fa-arrow-circle-right
+            .clearfix
+
+  //– Вторая строка: низкий запас и приветствие
+  .row
+    .col-lg-3.col-md-6
+      .panel.panel-default
+        .panel-heading
+          .row
+            .col-xs-3
+              i.fa.fa-exclamation-triangle.fa-5x
+            .col-xs-9.text-right
+              .huge #{lowStockCount}
+              div Low Stock
+        a(href='/admin/dashboard#lowStockItems')
+          .panel-footer
+            span.pull-left Details
+            span.pull-right
+              i.fa.fa-arrow-circle-right
+            .clearfix
+
+    .col-lg-9
+      .well
+        h4 Welcome, #{user.username}
+        p Use the sidebar to navigate through management sections.
+
+  //– Третья строка: недавние аудиты
+  .row.mt-4
+    .col-lg-12
+      h3 Recent Audit Logs
+      .table-responsive
+        table.table.table-bordered.table-striped
+          thead
+            tr
+              th Time
+              th User
+              th Action
+          tbody
+            if auditLogs && auditLogs.length
+              each log in auditLogs
+                tr
+                  td= log.createdAt.toLocaleString()
+                  td= log.User ? log.User.username : 'Unknown'
+                  td= log.action
+            else
+              tr
+                td(colspan='3') No activity recorded
+      a.btn.btn-link.mt-2(href='/admin/audit') View All Logs

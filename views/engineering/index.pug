@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+  h1 Engineering
+  p.mb-3 Overview of technical inventory status.
+  if lowItems && lowItems.length
+    h3 Low Stock Items
+    a.btn.btn-sm.btn-secondary.mb-2(href='/engineering/low-stock.csv') Download CSV
+    table.table.table-striped
+      thead
+        tr
+          th Name
+          th Quantity
+          th Minimum
+      tbody
+        each item in lowItems
+          tr
+            td= item.name
+            td= item.quantity
+            td= item.minQuantity
+  else
+    p All inventory levels are healthy.

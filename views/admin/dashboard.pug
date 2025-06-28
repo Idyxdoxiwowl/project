@@ -1,0 +1,143 @@
+extends ../admin-layout
+
+block content
+  .row
+    .col-lg-12
+      h1.page-header
+        | Admin Dashboard
+        small  Overview
+  
+  .row
+    .col-lg-3.col-md-6
+      .panel.panel-primary
+        .panel-heading
+          .row
+            .col-xs-3
+              i.fa.fa-users.fa-5x
+            .col-xs-9.text-right
+              .huge #{usersCount}
+              div Users
+        a(href='/admin/users')
+          .panel-footer
+            span.pull-left View Details
+            span.pull-right
+              i.fa.fa-arrow-circle-right
+            .clearfix
+    
+    .col-lg-3.col-md-6
+      .panel.panel-green
+        .panel-heading
+          .row
+            .col-xs-3
+              i.fa.fa-box.fa-5x
+            .col-xs-9.text-right
+              .huge #{consumablesCount}
+              div Consumables
+        a(href='/admin/consumables')
+          .panel-footer
+            span.pull-left View Details
+            span.pull-right
+              i.fa.fa-arrow-circle-right
+            .clearfix
+    
+    .col-lg-3.col-md-6
+      .panel.panel-yellow
+        .panel-heading
+          .row
+            .col-xs-3
+              i.fa.fa-tools.fa-5x
+            .col-xs-9.text-right
+              .huge #{materialsCount}
+              div Materials
+        a(href='/admin/materials')
+          .panel-footer
+            span.pull-left View Details
+            span.pull-right
+              i.fa.fa-arrow-circle-right
+            .clearfix
+    
+    .col-lg-3.col-md-6
+      .panel.panel-red
+        .panel-heading
+          .row
+            .col-xs-3
+              i.fa.fa-exclamation-triangle.fa-5x
+            .col-xs-9.text-right
+              .huge #{lowStockCount}
+              div Low Stock
+        a(href='#lowStockItems')
+          .panel-footer
+            span.pull-left View Details
+            span.pull-right
+              i.fa.fa-arrow-circle-right
+            .clearfix
+  
+  .row
+    .col-lg-12
+      .panel.panel-default
+        .panel-heading
+          h3.panel-title
+            i.fa.fa-clock.mr-1
+            |  Recent Activity
+        .panel-body
+          .table-responsive
+            table.table.table-bordered.table-hover.table-striped
+              thead
+                tr
+                  th Item Name
+                  th Category
+                  th Quantity
+                  th Unit
+                  th Price
+                  th Last Updated
+                  th Updated By
+                  th Actions
+              tbody
+                each item in recentItems
+                  tr(class=item.quantity < 10 ? 'danger' : '')
+                    td= item.name
+                    td= item.category
+                    td= item.quantity
+                    td= item.unit
+                    td $#{item.price.toFixed(2)}
+                    td= item.lastUpdated.toLocaleDateString()
+                    td= item.updatedBy ? item.updatedBy.username : 'Unknown'
+                    td
+                      a.btn.btn-xs.btn-info.mr-1(href=`/admin/inventory/edit/${item.id}`)
+                        i.fa.fa-edit
+                      form(action=`/admin/inventory/delete/${item.id}`, method='POST', style='display:inline;', onsubmit="return confirm('Are you sure you want to delete this item?');")
+                        button.btn.btn-xs.btn-danger(type='submit')
+                          i.fa.fa-trash
+  
+  if lowStockCount > 0
+    .row
+      .col-lg-12
+        .panel.panel-red#lowStockItems
+          .panel-heading
+            h3.panel-title
+              i.fa.fa-exclamation-triangle.mr-1
+              |  Low Stock Items
+          .panel-body
+            .table-responsive
+              table.table.table-bordered.table-hover.table-striped
+                thead
+                  tr
+                    th Item Name
+                    th Category
+                    th Quantity
+                    th Unit
+                    th Price
+                    th Actions
+                tbody
+                  each item in recentItems.filter(item => item.quantity < 10)
+                    tr.danger
+                      td= item.name
+                      td= item.category
+                      td= item.quantity
+                      td= item.unit
+                      td $#{item.price.toFixed(2)}
+                      td
+                        a.btn.btn-xs.btn-primary.mr-1(href=`/admin/inventory/edit/${item.id}`)
+                          i.fa.fa-plus  Restock
+                        a.btn.btn-xs.btn-info.mr-1(href=`/admin/inventory/edit/${item.id}`)
+                          i.fa.fa-edit

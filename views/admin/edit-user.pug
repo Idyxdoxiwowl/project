@@ -1,0 +1,26 @@
+extends ../admin-layout
+
+block content
+  .row
+    .col-lg-12
+      h1.page-header Edit User
+  .row
+    .col-lg-6
+      form(action=`/admin/users/edit/${editUser.id}`, method='POST')
+        .form-group
+          label(for='username') Username
+          input.form-control(type='text', name='username', value=editUser.username, required)
+        .form-group
+          label(for='email') Email
+          input.form-control(type='email', name='email', value=editUser.email, required)
+        .form-group
+          label(for='password') New Password
+          input.form-control(type='password', name='password')
+        .form-group
+          label(for='role') Role
+          select.form-control(name='role')
+            option(value='engineer', selected=editUser.role==='engineer') Engineer
+            option(value='accountant', selected=editUser.role==='accountant') Accountant
+            option(value='admin', selected=editUser.role==='admin') Admin
+        button.btn.btn-primary(type='submit') Update
+        a.btn.btn-default(href='/admin/users') Cancel

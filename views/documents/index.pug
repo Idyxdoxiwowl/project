@@ -1,0 +1,40 @@
+extends ../layout
+
+block content
+  h1 Documents
+  form(method="get", action="/documents", class="mb-4")
+    .form-row
+      .col-md-3
+        input.form-control(type="text", name="category", placeholder="Category", value=filters.category)
+      .col-md-3
+        input.form-control(type="text", name="department", placeholder="Department", value=filters.department)
+      .col-md-2
+        input.form-control(type="text", name="type", placeholder="Type", value=filters.type)
+      .col-md-2
+        input.form-control(type="date", name="startDate", value=filters.startDate)
+      .col-md-2
+        input.form-control(type="date", name="endDate", value=filters.endDate)
+    button.btn.btn-primary.mt-2(type="submit") Filter
+  a.btn.btn-success.mb-3(href="/documents/upload") Upload Document
+  if documents.length
+    table.table.table-hover
+      thead
+        tr
+          th Title
+          th Category
+          th Department
+          th Type
+          th Date
+          th Actions
+      tbody
+        each doc in documents
+          tr
+            td #{doc.title}
+            td #{doc.category}
+            td #{doc.department}
+            td #{doc.type}
+            td #{doc.createdAt.toDateString()}
+            td
+              a.btn.btn-sm.btn-outline-primary(href=`/uploads/${doc.path}`, target="_blank") View
+  else
+    p No documents found.
